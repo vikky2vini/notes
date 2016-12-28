@@ -1,0 +1,31 @@
+## mednafen
+
+###### Custom config values:
+autosave 1
+filesys.path_sav /home/jay/games/.saves/mednafen-saves
+filesys.path_state /home/jay/games/.saves/mednafen-states
+gb.stretch aspect
+gb.videoip 1
+gba.bios /home/jay/games/.bios/gba.bios
+gba.stretch aspect
+gba.videoip 1
+gba.xres 1920
+gba.yres 1080
+md.input.port1 gamepad6
+md.stretch aspect
+nes.stretch full
+nes.videoip 1
+nes.xres 1920
+nes.yres 1080
+pce.cdbios /home/jay/games/.bios/pce-cd.pce
+pce.stretch full
+psx.bios_na /home/jay/games/.bios/scph5501.bin
+psx.stretch aspect
+snes.stretch aspect
+snes.videoip 1
+snes.xres 1920
+snes.yres 1080
+sound.buffer_time 32
+sound.device sexyal-literal-default
+sound.driver sdl
+video.fs 1
