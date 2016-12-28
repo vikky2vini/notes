@@ -1,0 +1,2 @@
+Show assigned DNS servers:
+  nmcli dev show |grep DNS
