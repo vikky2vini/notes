@@ -1,5 +1,10 @@
 ## Firefox
 
+#### Keyboard shortcuts
+    Close tab: CTRL+W
+    Close window: CTRL+Q
+    Move focus to address bar: CTRL+L
+
 #### about:config tweaks
 
 ######Enable 1080p video support:
