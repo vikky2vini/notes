@@ -1,90 +1,110 @@
 ## Arch Linux
 
 #### Misc Tweaks
-######Disable turbo boost:
+
+###### Disable turbo boost:
   `# echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo`
 
-######Disable systemd from handling lid close events:
-Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to ignore.
+###### Disable systemd from handling lid close events:
+Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
 
-######Accessing a wifi network via the shell:
+###### Accessing a wifi network via the shell:
+  Use `wifi-menu`. If not available, you an manually bring up a wireless info by performing the following:
   1. `#cp /etc/netctl/examples/wireless-wpa /etc/netctl/imagisphere`
   2. Edit `/etc/netctl/imagisphere` with network info
   3. `# netctl start imagisphere`
 
 ### Installation procedures
-######Installation procedure (no encryption):
-  1.  Create lvm:
-          `Non-SSD: pvcreate /dev/sda1`
-          `SSD: pvcreate --dataalignment 1m /dev/sda1`
-          `vgcreate volgroup0 /dev/sda1`
-          `lvcreate -L 30GB volgroup0 -n lv_root`
-          `lvcreate -L 10GB volgroup0 -n lv_swap`
-          `lvcreate -L 250GB volgroup0 -n lv_home`
-          `modprobe dm_mod`
-          `vgscan`
-          `vgchange -ay`
-  2.  `# mkfs.ext4 /dev/volgroup0/lv_root`
-  3.  `# mkfs.ext4 /dev/volgroup0/lv_home`
-  4.  `# mount /dev/volgroup0/lv_root /mnt`
-  5.  `# mkdir /mnt/home`
-  6.  `# mount /dev/volgroup0/lv_home /mnt/home`
-  7.  `# pacstrap -i /mnt base`
-  8.  `# genfstab -U -p /mnt >> /mnt/etc/fstab`
-  9.  `# arch-chroot /mnt`
-  10. `# pacman -S openssh grub-bios linux-headers linux-lts linux-lts-headers`
-  11. If wireless: `# pacman -S dialog wpa_supplicant wireless_tools`
-  12. Edit `/etc/mkinitcpio.conf` and add `lvm2` in between `block` and `filesystems`
-  13. `# mkinitcpio -p linux`
-  14. `# mkinitcpio -p linux-lts`
-  15. `# nano /etc/locale.gen (uncomment en_US.UTF-8)`
-  16. `# locale-gen`
-  17. `# ln -s /usr/share/zoneinfo/America/Detroit /etc/localtime`
-  18. `# hwclock --systohc --utc`
-  19. Enable `root` logon via `ssh`
-  20. `# systemctl enable sshd.service`
-  21. `# passwd` (for root)
-  22. `# grub-install --target=i386-pc --recheck /dev/sda`
-  23. `# cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo`
-  24. `# grub-mkconfig -o /boot/grub/grub.cfg`
-  25. `$ exit`
-  26. `# umount /mnt/home`
-  27. `# umount /mnt`
-  28. `$ reboot`
-  29. Once Arch boots up, see if it has an IP address: `ip addr show`
-  30. If not: `# dhcpcd`
+###### Installation procedure (no encryption):
+  1. Partition disk, create lvm partition:
+
+     `# fdisk /dev/sda`
+
+      * o
+      * enter
+      * w
+      * n
+      * p
+      * 1
+      * enter
+      * enter
+      * t
+      * 1
+      * 8E
+      * w
+
+  2.  Create lvm:
+        * Non-SSD: `# pvcreate /dev/sda1`
+        * SSD: `# pvcreate --dataalignment 1m /dev/sda1`
+        * Example commands for setting up LVM:
+          * `# vgcreate volgroup0 /dev/sda1`
+          * `# lvcreate -L 30GB volgroup0 -n lv_root`
+          * `# lvcreate -L 10GB volgroup0 -n lv_swap`
+          * `# lvcreate -L 250GB volgroup0 -n lv_home`
+          * `# modprobe dm_mod`
+          * `# vgscan`
+          * `# vgchange -ay`
+  3.  `# mkfs.ext4 /dev/volgroup0/lv_root`
+  4.  `# mkfs.ext4 /dev/volgroup0/lv_home`
+  5.  `# mount /dev/volgroup0/lv_root /mnt`
+  6.  `# mkdir /mnt/home`
+  7.  `# mount /dev/volgroup0/lv_home /mnt/home`
+  8.  `# pacstrap -i /mnt base`
+  9.  `# genfstab -U -p /mnt >> /mnt/etc/fstab`
+  10.  `# arch-chroot /mnt`
+  11. `# pacman -S openssh grub-bios linux-headers linux-lts linux-lts-headers`
+  12. If wireless: `# pacman -S dialog wpa_supplicant wireless_tools`
+  13. Edit `/etc/mkinitcpio.conf` and add `lvm2` in between `block` and `filesystems`
+  14. `# mkinitcpio -p linux`
+  15. `# mkinitcpio -p linux-lts`
+  16. `# nano /etc/locale.gen (uncomment en_US.UTF-8)`
+  17. `# locale-gen`
+  18. `# ln -s /usr/share/zoneinfo/America/Detroit /etc/localtime`
+  19. `# hwclock --systohc --utc`
+  20. Enable `root` logon via `ssh`
+  21. `# systemctl enable sshd.service`
+  22. `# passwd` (for root)
+  23. `# grub-install --target=i386-pc --recheck /dev/sda`
+  24. `# cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo`
+  25. `# grub-mkconfig -o /boot/grub/grub.cfg`
+  26. `$ exit`
+  27. `# umount /mnt/home`
+  28. `# umount /mnt`
+  29. `# reboot`
 
 ###### Installation procedure (encrypted lvm):
-  1. Partition disk
+  1. Partition disk, create boot and lvm partitions:
+
        `# fdisk /dev/sda`
-          `n`
-          `p`
-          `1`
-          `enter`
-          `+400M`
-          `n`
-          `p`
-          `2`
-          `enter`
-          `enter`
-          `t`
-          `2`
-          `8E`
-          `w`
+
+        * n
+        * p
+        * 1
+        * enter
+        * +400M
+        * n
+        * p
+        * 2
+        * enter
+        * enter
+        * t
+        * 2
+        * 8E
+        * w
 
   2. Set up encryption
-       `$ cryptsetup luksFormat /dev/sda2`
-       `$ cryptsetup open --type luks /dev/sda2 lvm`
+       * `$ cryptsetup luksFormat /dev/sda2`
+       * `$ cryptsetup open --type luks /dev/sda2 lvm`
 
   3.  Set up lvm:
-        `# pvcreate --dataalignment 1m /dev/mapper/lvm`
-        `# vgcreate volgroup0 /dev/mapper/lvm`
-        `# lvcreate -L 30GB volgroup0 -n lv_root`
-        `# lvcreate -L 10GB volgroup0 -n lv_swap`
-        `# lvcreate -L 250GB volgroup0 -n lv_home`
-        `# modprobe dm_mod`
-        `# vgscan`
-        `# vgchange -ay`
+        * `# pvcreate --dataalignment 1m /dev/mapper/lvm`
+        * `# vgcreate volgroup0 /dev/mapper/lvm`
+        * `# lvcreate -L 30GB volgroup0 -n lv_root`
+        * `# lvcreate -L 10GB volgroup0 -n lv_swap`
+        * `# lvcreate -L 250GB volgroup0 -n lv_home`
+        * `# modprobe dm_mod`
+        * `# vgscan`
+        * `# vgchange -ay`
 
   4.  `# mkfs.ext2 /dev/sda1`
   5.  `# mkfs.ext4 /dev/volgroup0/lv_root`
@@ -125,16 +145,13 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to ignore.
 
 
 ###### Post installation steps:
-  1. `# localectl set-locale LANG="en_US.UTF-8"`
+  1. Fix GNOME app issues: `# localectl set-locale LANG="en_US.UTF-8"`
   2. Find `blkid` for swap, add it to fstab: `UUID=<UUID> none swap defaults 0 0`
   3. Add to `fstab`:
 	   `tmpfs   /tmp         tmpfs   nodev,nosuid,size=2G          0  0`
   4. If ssd, add `discard` to `fstab`. Example:
 	   `UUID=<UUID>	/         	ext4      	defaults,noatime,discard	0 2`
 
-#### pacman
-###### Ignore a group of packages:
-  IgnoreGroup = xorg
 
 #### Previous Issues:
 ###### If grub gives an error on step 18, add the following to the end of /etc/default/grub:
