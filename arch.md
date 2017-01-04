@@ -15,15 +15,15 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to ignore.
 ### Installation procedures
 ######Installation procedure (no encryption):
   1.  Create lvm:
-          Non-SSD: pvcreate /dev/sda1
-          SSD: pvcreate --dataalignment 1m /dev/sda1
-          vgcreate volgroup0 /dev/sda1
-          lvcreate -L 30GB volgroup0 -n lv_root
-          lvcreate -L 10GB volgroup0 -n lv_swap
-          lvcreate -L 250GB volgroup0 -n lv_home
-          modprobe dm_mod
-          vgscan
-          vgchange -ay
+          `Non-SSD: pvcreate /dev/sda1`
+          `SSD: pvcreate --dataalignment 1m /dev/sda1`
+          `vgcreate volgroup0 /dev/sda1`
+          `lvcreate -L 30GB volgroup0 -n lv_root`
+          `lvcreate -L 10GB volgroup0 -n lv_swap`
+          `lvcreate -L 250GB volgroup0 -n lv_home`
+          `modprobe dm_mod`
+          `vgscan`
+          `vgchange -ay`
   2.  `# mkfs.ext4 /dev/volgroup0/lv_root`
   3.  `# mkfs.ext4 /dev/volgroup0/lv_home`
   4.  `# mount /dev/volgroup0/lv_root /mnt`
@@ -33,7 +33,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to ignore.
   8.  `# genfstab -U -p /mnt >> /mnt/etc/fstab`
   9.  `# arch-chroot /mnt`
   10. `# pacman -S openssh grub-bios linux-headers linux-lts linux-lts-headers`
-  11. If wireless: `# pacman -S wpa_supplicant wireless_tools`
+  11. If wireless: `# pacman -S dialog wpa_supplicant wireless_tools`
   12. Edit `/etc/mkinitcpio.conf` and add `lvm2` in between `block` and `filesystems`
   13. `# mkinitcpio -p linux`
   14. `# mkinitcpio -p linux-lts`
@@ -57,20 +57,20 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to ignore.
 ###### Installation procedure (encrypted lvm):
   1. Partition disk
        `# fdisk /dev/sda`
-          n
-          p
-          1
-          enter
-          +400M
-          n
-          p
-          2
-          enter
-          enter
-          t
-          2
-          8E
-          w
+          `n`
+          `p`
+          `1`
+          `enter`
+          `+400M`
+          `n`
+          `p`
+          `2`
+          `enter`
+          `enter`
+          `t`
+          `2`
+          `8E`
+          `w`
 
   2. Set up encryption
        `$ cryptsetup luksFormat /dev/sda2`
@@ -98,7 +98,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to ignore.
   13. `# genfstab -U -p /mnt >> /mnt/etc/fstab`
   14. `# arch-chroot /mnt`
   15. `# pacman -S openssh grub-bios linux-headers linux-lts linux-lts-headers`
-  16. If wireless: `# pacman -S wpa_supplicant wireless_tools`
+  16. If wireless: `# pacman -S dialog wpa_supplicant wireless_tools`
   17. Edit `/etc/mkinitcpio.conf` and add `encrypt lvm2` in between `block` and `filesystems`
   18. `# mkinitcpio -p linux`
   19. `# mkinitcpio -p linux-lts`
