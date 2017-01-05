@@ -34,11 +34,11 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
       * w
 
   2.  Create lvm:
-  
+
         * Non-SSD: `# pvcreate /dev/sda1`
         * SSD: `# pvcreate --dataalignment 1m /dev/sda1`
         * Example commands for setting up LVM:
-	
+
           * `# vgcreate volgroup0 /dev/sda1`
           * `# lvcreate -L 30GB volgroup0 -n lv_root`
           * `# lvcreate -L 10GB volgroup0 -n lv_swap`
@@ -46,7 +46,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
           * `# modprobe dm_mod`
           * `# vgscan`
           * `# vgchange -ay`
-	  
+
   3.  `# mkfs.ext4 /dev/volgroup0/lv_root`
   4.  `# mkfs.ext4 /dev/volgroup0/lv_home`
   5.  `# mount /dev/volgroup0/lv_root /mnt`

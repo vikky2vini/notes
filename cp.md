@@ -1,4 +1,4 @@
 ## cp
 
-###### Copy files while retaining links: 
+###### Copy files while retaining links:
   `$ cp -Prv`
