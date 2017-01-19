@@ -7,7 +7,10 @@
 
 #### about:config tweaks
 
-######Enable 1080p video support:
+###### Disable site notifications
+    dom.webnotifications.enabled = false
+
+###### Enable 1080p video support:
     media.mediasource.enabled from = true
     media.mediasource.webm.enabled = true
     media.mediasource.mp4.enabled = true
@@ -15,5 +18,5 @@
     media.fragmented-mp4.* = true
     media.mediasource.ignore_codecs = true
 
-######Stop sites from disabling right-click:
+###### Stop sites from disabling right-click:
     dom.event.clipboardevents.enabled = false
