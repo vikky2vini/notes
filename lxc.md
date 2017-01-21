@@ -1,5 +1,11 @@
 ## Linux Containers
 
+#### Configuration
+
+###### Changing storage location for containers
+    Edit or create the following file: /etc/lxc/lxc.conf
+    Add the line: lxc.lxcpath = /opt/lxc
+
 #### lxc commands
 
 ###### Create a new 64-bit Ubuntu container:
@@ -49,6 +55,8 @@
 
 #### Config tweaks
 
+Note: Set these in /etc/lxc/default.conf to make them always present in the resulting container.
+
 ###### Networking
     lxc.network.type = veth
     lxc.network.link = virbr0
@@ -81,9 +89,6 @@
     lxc.mount.entry = /dev/snd dev/snd none bind,optional,create=dir
     lxc.mount.entry = ~/.config/pulse home/jay/.config/pulse none bind,optional,create=dir
 
-##### Changing storage location for containers
-    Edit or create the following file: /etc/lxc/lxc.conf
-    Add the line: lxc.lxcpath = /opt/lxc
 
 #### Complete configuration example
     # Template used to create this container: /usr/share/lxc/templates/lxc-ubuntu
