@@ -82,7 +82,7 @@ Note: Set these in /etc/lxc/default.conf to make them always present in the resu
       cd /dev
       mknod -m 666 nvidia-modeset c 195 254
       mknod -m 666 nvidia0 c 195 0
-      mknod -m 666 nvidiactl c 195 255mknod -m 666 nvidiactl c 195 255
+      mknod -m 666 nvidiactl c 195 255
 
 ##### Accessing sound card from the host
     lxc.cgroup.devices.allow = c 116:* rwm
