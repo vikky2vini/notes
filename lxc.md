@@ -17,6 +17,9 @@
 ##### Create a container of a specific distribution release version:
   `# lxc-create -n test64 -t ubuntu -- -r xenial`
 
+##### Create a container with a specific user name:
+  ` # lxc-create -n games -t ubuntu -- --user jay -r xenial`
+
 ###### Create a container of a specific distribution release version (i686):
   `# lxc-create -n test32 -t ubuntu -- -a i686 --release xenial`
 
@@ -65,20 +68,26 @@ Note: Set these in /etc/lxc/default.conf to make them always present in the resu
 ###### Mounting directories from the host
     lxc.mount.entry = /opt/games opt/games none bind,create=dir
 
-###### Accessing display from the host
+###### Accessing display (X) from the host
     lxc.mount.entry = tmpfs tmp tmpfs defaults
     lxc.mount.entry = /dev/dri dev/dri none bind,optional,create=dir
     lxc.mount.entry = /tmp/.X11-unix tmp/.X11-unix none bind,optional,create=dir
     lxc.mount.entry = /dev/video0 dev/video0 none bind,optional,create=file
+    lxc.cgroup.devices.allow = c 226:* rwm
 
 ###### Accessing nvidia card from the host
     Add the mount entries in the step previous.
-    Install the nvidia driver: # apt-get install --no-install-recommends nvidia-367
+    Install the nvidia driver: # sh <nvidia_installer>.run --no-kernel-module
+
     Add the following lines to the config file:
-      lxc.cgroup.devices.allow = c 226:* rwm
       lxc.cgroup.devices.allow = c 195:* rwm
-      lxc.cgroup.devices.allow = c 116:* rwm
-    Create required dev files:
+
+    Add the following lines to manually moutn /dev/nvidia* devices:
+      lxc.mount.entry = /dev/nvidia0 dev/nvidia0 none bind,optional,create=file
+      lxc.mount.entry = /dev/nvidiactl dev/nvidiactl none bind,optional,create=file
+      lxc.mount.entry = /dev/nvidia-modeset dev/nvidia-modeset none bind,optional,create=file
+
+    Create required dev files (if not mounting /dev/nvidia* devices:
       cd /dev
       mknod -m 666 nvidia-modeset c 195 254
       mknod -m 666 nvidia0 c 195 0
@@ -91,36 +100,38 @@ Note: Set these in /etc/lxc/default.conf to make them always present in the resu
 
 
 #### Complete configuration example
-    # Template used to create this container: /usr/share/lxc/templates/lxc-ubuntu
 
-    # Common configuration
-    lxc.include = /usr/share/lxc/config/ubuntu.common.conf
+  # Common configuration
+  lxc.include = /usr/share/lxc/config/ubuntu.common.conf
+  lxc.rootfs = /opt/lxc/games/rootfs
+  lxc.rootfs.backend = dir
+  lxc.utsname = games
+  lxc.arch = amd64
 
-    # Container specific configuration
-    lxc.rootfs = /var/lib/lxc/test64/rootfs
-    lxc.rootfs.backend = dir
-    lxc.utsname = test64
-    lxc.arch = amd64
+  # X
+  lxc.mount.entry = tmpfs tmp tmpfs defaults
+  lxc.mount.entry = /dev/dri dev/dri none bind,optional,create=dir
+  lxc.mount.entry = /tmp/.X11-unix tmp/.X11-unix none bind,optional,create=dir
+  lxc.mount.entry = /dev/video0 dev/video0 none bind,optional,create=file
+  lxc.cgroup.devices.allow = c 226:* rwm
 
-    ## network
-    lxc.network.type = veth
-    lxc.network.link = virbr0
-    lxc.network.flags = up
+  # Nvidia
+  lxc.cgroup.devices.allow = c 195:* rwm
+  lxc.mount.entry = /dev/nvidia0 dev/nvidia0 none bind,optional,create=file
+  lxc.mount.entry = /dev/nvidiactl dev/nvidiactl none bind,optional,create=file
+  lxc.mount.entry = /dev/nvidia-modeset dev/nvidia-modeset none bind,optional,create=file
 
-    ## local mount points
-    lxc.mount.entry = /opt/games opt/games none bind,create=dir
+  # Audio
+  lxc.cgroup.devices.allow = c 116:* rwm
+  lxc.mount.entry = /dev/snd dev/snd none bind,optional,create=dir
+  lxc.mount.entry = ~/.config/pulse home/jay/.config/pulse none bind,optional,create=dir
 
-    ## for xorg
-    ## fix overmounting see: https://github.com/lxc/lxc/issues/434
-    lxc.mount.entry = tmpfs tmp tmpfs defaults
-    lxc.mount.entry = /dev/dri dev/dri none bind,optional,create=dir
-    lxc.mount.entry = /tmp/.X11-unix tmp/.X11-unix none bind,optional,create=dir
-    lxc.mount.entry = /dev/video0 dev/video0 none bind,optional,create=file
+  # Network configuration
+  lxc.network.type = veth
+  lxc.network.hwaddr = 00:16:3e:67:d8:17
+  lxc.network.link = virbr0
+  lxc.network.flags = up
 
-    # For audio support:
-    lxc.cgroup.devices.allow = c 116:* rwm
-    lxc.mount.entry = /dev/snd dev/snd none bind,optional,create=dir
-    lxc.mount.entry = ~/.config/pulse home/jay/.config/pulse none bind,optional,create=dir
 
 #### Previous issues
 
