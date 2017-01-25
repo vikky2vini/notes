@@ -41,9 +41,6 @@
 ###### Install required packages for setting up a gaming container
   `sudo lxc-attach -n gaming-test-2 -- sudo apt-get install aptitude alsa-utils libasound2:i386 libasound2-data:i386 libasound2-plugins:i386 libc6:i386 libgl1-mesa-dev libgl1-mesa-glx:i386 libglu1-mesa:i386 libgtk2.0-0:i386 liblcms2-2:i386 libnss-mdns:i386 libsdl2-2.0-0:i386 libsdl2-image-2.0-0:i386 mesa-utils python-gtk2`
 
-##### Additional packages requried for setting up a gaming container (nvidia):
-  `# sudo lxc-attach -n gaming-test-2 -- sudo apt-get install --no-install-recommends nvidia-367 nvidia-367:i386` Note: the second package is an assumption.
-
 ###### Enable 32-bit packages in container (Debian-based):
   `sudo lxc-attach -n gaming-test-2 -- sudo dpkg --add-architecture i386`
 
