@@ -10,6 +10,9 @@
 ###### Disable site notifications
     dom.webnotifications.enabled = false
 
+###### Closing last tab closes window
+    browser.tabs.closeWindowWithLastTab true
+
 ###### Enable 1080p video support:
     media.mediasource.enabled from = true
     media.mediasource.webm.enabled = true
