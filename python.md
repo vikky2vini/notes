@@ -1,5 +1,22 @@
 ## Python
 
+###### Creating a virtual environment:
+	1. Make sure the required virtualenv package is installed:
+          (i.e. python-virtualenv python3-virtualenv)
+    2. Create a directory for that project, cd into that project
+          `$ mkdir projects/myproject && cd projects/myproject`
+	3. Create the virtual environment:
+          `$ virtualenv .lpenv` (if you want to use system's version of python)
+          `$ virtualenv -p /usr/bin/python3 .lpvenv` (for a specific python version)
+	3. Activate the virtual environment:
+          `$ source /env/teamcity_env/bin/activate`
+	4. Perform work
+	5. Deactivate the virtual environment
+          `$ deactivate`
+
+###### Packages
+Packages are nothing more than a folder, with a special file: __init__.py. This file doesn't need to hold any code, but its presense in this directory tells python that the folder is actually a package. The book "Learning Python" has a great writeup of what a package is and how it looks from a directory tree in the first chapter, in the section "How is Python code organized."
+
 ###### Creating a tuple:
     my_tuple = ("item1", "item2", "item3")
  Note: Parenthesis aren't necessary, but look better.
@@ -41,10 +58,18 @@
         print(k + ":" + v)
 
 ###### Creating a virtual environment:
-	1. sudo pip install virtualenv
-	2. virtualenv /env/teamcity_env
-	3. source /env/teamcity_env/bin/activate
-	4. pip install -r requirements.txt (install list of packages listedin file)
-	5. virtualenv-2.7 /env/teamcity_env2
+	1. Make sure the required virtualenv package is installed:
+          (i.e. python-virtualenv python3-virtualenv)
+    2. Create a directory for that project, cd into that project
+          `$ mkdir projects/myproject && cd projects/myproject`
+	3. Create the virtual environment:
+          `$ virtualenv .lpenv` (if you want to use system's version of python)
+          `$ virtualenv -p /usr/bin/python3 .lpvenv` (for a specific python version)
+	3. Activate the virtual environment:
+          `$ source /env/teamcity_env/bin/activate`
+	4. Perform work
+	5. Deactivate the virtual environment
+          `$ deactivate1
+
 
 [More info on lists, tuples, and dictionaries](    http://www.wellho.net/solutions/python-python-list-python-tuple-python-dictionary.html)
