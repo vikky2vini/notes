@@ -251,6 +251,14 @@ Place a number in front of the command. For example:
 	3. :sort ui
 
 
+###### Insert output of a command into the file
+    `:r! pwd`
+
+
+###### Insert existing file
+    `:r /etc/passwd`
+
+
 ###### Useful submodules:
     $ git submodule add https://github.com/tpope/vim-pathogen.git vim/bundle/pathogen
     $ git submodule add https://github.com/scrooloose/syntastic vim/bundle/syntastic
