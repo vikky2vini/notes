@@ -1,5 +1,11 @@
 ## pacman
 
+###### Check for orphans
+  `$ pacman -Qdt`
+
+###### Remove orphans
+  `# pacman -Rs $(pacman -Qqdt)
+
 ###### Find out which package owns a file:
   `$ pacman -Qo /path/to/file
 
