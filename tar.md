@@ -10,7 +10,7 @@
   `$ tar -xvjf archivefile.tar.bz2`
 
 ###### Extract files to a specific directory or path:
-  `@$tar -xvzf tarfile.tar.gz -C /opt/folder/`
+  `$ tar -xvzf tarfile.tar.gz -C /opt/folder/`
 
 ###### Extract a single file from an archive, and extract it to a specific directory:
   `$ tar -xvf tarfile.tar root/anaconda-ks.cfg -C /tmp/`
