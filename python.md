@@ -353,7 +353,7 @@ Example:
 * You can call the numerator and denominator of a fraction directly.
 
     `f.numerator`
-		
+
     `f.denominator`
 
 # misc notes
@@ -361,5 +361,7 @@ Example:
 * Python integers have unlimited range, limited only by the available virtual memory
 * Using / in division is true division. Using // is floored division
 * Integer division in Python is always rounded towards minus infinity
+* When you create two objects with the same value, the id's will be different. That is, unless the value is small, in which case Python will map to the same id to save memory.
+
 
 [More info on lists, tuples, and dictionaries](    http://www.wellho.net/solutions/python-python-list-python-tuple-python-dictionary.html)

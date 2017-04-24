@@ -39,11 +39,11 @@
 control+w, q
 
 ###### Open a new window, but with the same file as the other buffer
-  ```:split```
+    :split
 
 or:
 
-  ````:vsplit```
+    :vsplit
 
 
 ## Tabs
@@ -107,7 +107,7 @@ ctrl-G
     G
 
 
-####### Move to the beginning of the file
+###### Move to the beginning of the file
     gg
 
 
@@ -242,7 +242,7 @@ Highlight file and type gf
 
 ###### Run a command multiple times in command mode
 Place a number in front of the command. For example:
-  ```64dd```
+    64dd
 
 
 ###### Sort lines alphabetically:
