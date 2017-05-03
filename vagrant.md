@@ -21,6 +21,15 @@
 ###### Remove a box:
   `$ vagrant box remove debian/jessie64`
 
+###### SSH directly into a box:
+From within the directory with the Vagrant file, run:
+  `$ vagrant ssh`
+
+###### Print SSH config:
+From within the directory with the Vagrant file, run:
+  `$ vagrant ssh-config`
+
+
 #### Vagrant Files
 
 ###### Create a fresh vagrant file
@@ -35,6 +44,12 @@
 
 ###### Declare box to use:
     $ config.vm.box = "debian/jessie64"
+
+###### Choose a name for the VM:
+Underneath config.vm.box = "ubuntu/xenial64" add:
+
+    config.vm.define :Test1 do |t|
+    end
 
 ###### Forward a port:
     $ config.vm.network "forwarded_port", guest: 80, host: 8080
