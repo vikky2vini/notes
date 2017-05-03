@@ -64,3 +64,10 @@
 
 ###### Halt and delete a VM:
     $ vagrant destroy
+
+#### Previous issues
+
+###### Unable to deploy a VM in Virtualbox
+Insall the vagrant-vbguest package:
+
+    vagrant plugin install vagrant-vbguest
