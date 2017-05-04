@@ -340,15 +340,15 @@ Example:
 * Immutable sequences are strings, tuples, and bytes.
 * If you create age = 42, then age = 43, you created two objects with the values of 42 and 43, but changed age to point to a different object. Their id's would be different. So basically, first age pointed to an int object with value 42, but now points to a different int object with a value of 43
 
-# string data type
+## string data type
 * Accessing a string at a precise character is known as indexing. Selecting a group of characters is known as slicing.
 * You can declare a string of multiple lines with ''' or """
 * If you use s[:] to call a string, it will print the entire string. Reason being, it uses the default start point (the beginning) and the default stop point (the end) as well as the default step (stepping 1 character at a time)
 
-# bool data type
+## bool data type
 * If a bool value is anything other than 0, it is true
 
-# fractions
+## fractions
 * You can use the Fraction class to deal with fractions. f = Fraction(10, 6)
 * You can call the numerator and denominator of a fraction directly.
 
@@ -356,7 +356,48 @@ Example:
 
     `f.denominator`
 
-# misc notes
+## Debugging
+These notes were taken from the April 2017 Penguicon panel. I have yet to test most of these.
+
+###### Start the debugger:
+The following will start python in debug mode and allow you to step through the script.
+
+     python -m pdb filename.py
+
+###### Debugger commands:
+
+u,d (move up and down the stack)
+n (execute the current statement, goes to the next line)
+b (show all break points, with its number)
+b linenum (set a break point at linenum)
+display <variable> (python3 only, displays variable any time it's changed, undisplay turns it off)
+disable number (disable breakpoint number)
+enable number (enable breakpoint number)
+tbreak linenum (set a temporary breakpoint at lineno, which is removed when first hit)
+c (continue exection until a breakpoint is encountered)
+s (execute and step into function)
+p expr (print expression)
+pp expr ("pretty print" the value of expr)
+l (list 11 lines of code around the current location)
+
+###### Start the debugger (within the code):
+
+     import pdb
+		 pdb.set_trace()
+
+###### pdbpp
+pdbpp is a drop-in replacement for pdb, with better features (colorization, tab completion, etc).
+Install it with the following command:
+
+     `$ pip install pdbpp`
+
+###### Useful debugging resources
+https://github.com/nblock/pdb-cheatsheet/blob/master/pdb-cheatsheet.pdf
+https://pymotw.com/3/pdb/
+https://docs.python.org/3/library/pdb.html
+https://pypi.python.org/pypi/pdbpp/
+
+## misc notes
 * When an object is created, it gets an id.
 * Python integers have unlimited range, limited only by the available virtual memory
 * Using / in division is true division. Using // is floored division
