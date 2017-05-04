@@ -29,6 +29,13 @@ From within the directory with the Vagrant file, run:
 From within the directory with the Vagrant file, run:
   `$ vagrant ssh-config`
 
+#### Plugins
+
+###### kvm
+     `$ vagrant plugin install vagrant-kvm`
+
+###### virtualbox
+     `$ vagrant plugin install vagrant-vbguest`
 
 #### Vagrant Files
 
@@ -85,4 +92,4 @@ Underneath config.vm.box = "ubuntu/xenial64" add:
 ###### Unable to deploy a VM in Virtualbox
 Insall the vagrant-vbguest package:
 
-    vagrant plugin install vagrant-vbguest
+    
