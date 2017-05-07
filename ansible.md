@@ -24,6 +24,12 @@
 ###### Check a playbook:
   `$ ansible-playbook playbook.yml --check`
 
+###### Dynamic inventory
+If the inventory file is marked as executable, ansible will execute it rather than just reading it. The inventory file that is used is set in ansible.cfg. It must support the following two command-line flags:
+
+    --host=<hostname> (for showing host details)
+    --list (for listing groups)
+
 ###### Building ansible from source:
 Install dependencies: `asciidoc cdbs devscripts`
 

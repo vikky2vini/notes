@@ -29,6 +29,10 @@ From within the directory with the Vagrant file, run:
 From within the directory with the Vagrant file, run:
   `$ vagrant ssh-config`
 
+###### Reprovision a VM:
+Note: Normally, provision only runs one time. The following command, when executed within the directory containing the Vagrantfile, will run this step again:
+  `$ vagrant provision`
+
 #### Plugins
 
 ###### kvm
