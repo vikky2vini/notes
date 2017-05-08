@@ -1,5 +1,11 @@
 ## Ansible
 
+#### Ansible Playbook commands
+
+###### Bootstrap an individual node, without an inventory file
+
+    `$ ansible-playbook -K -k -u jay -i "phantom.local.lan," bootstrap_ubuntu.yml`
+
 #### Ansible Server commands
 
 ###### Ping all hosts:
