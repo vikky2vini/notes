@@ -247,8 +247,14 @@ Place a number in front of the command. For example:
 
 ###### Sort lines alphabetically:
 	1. v for visual select
-	2. down arrow to highlight lines
+	2. use arrow keys to highlight lines
 	3. :sort ui
+
+
+###### Indent multiple lines:
+    1. v for visual select
+    2. user arrow keys to highlight lines
+    3. type le 4 (to indent 4 spaces)
 
 
 ###### Insert output of a command into the file

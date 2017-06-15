@@ -7,6 +7,9 @@
 
 #### about:config tweaks
 
+###### Lower session store interval
+    Update browser.sessionstore.interval to a larger number
+
 ###### Disable site notifications
     dom.webnotifications.enabled = false
 
