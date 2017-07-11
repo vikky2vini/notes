@@ -9,6 +9,15 @@
 ###### Change nick:
   `/nick new_nick`
 
+###### View information
+  `/msg NickServ Info`
+
+###### Change registration email
+  `/msg NickServ set email myemail@domain.com`
+
+###### Resend confirmation email
+  `/query nickserv resend`
+
 ## irssi specific
 
 ###### Automatically connect to a server on startup
