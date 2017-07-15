@@ -20,7 +20,7 @@
 ###### Setting up a new mail server (migrating configuration from existing)
 
   * Set up new droplet
-  
+
   * apt-get update && apt-get dist-upgrade
 
   * reboot
@@ -96,6 +96,9 @@
 
     Add to the end of /etc/apache2/sites-available/000-default.conf:
     `Redirect permanent / https://mail.iostreamcomputing.net/webmail`
+
+    Edit /etc/roundcube/apache.conf:
+    Change `Alias /roundcube /var/lib/roundcube` to `Alias /webmail /var/lib/roundcube`
 
   * Enable default ssl site in apache:
      `a2enmod ssl`
