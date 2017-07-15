@@ -114,7 +114,7 @@
 
   * `systemctl restart apache2`
 
-  * Clearning dovecot index (may or may not be necessary, but the index would've been copied from the old server while scp'ing the mail): rm /var/mail/vhosts/jaylacroix.me/jay/dovecot.index*
+  * Clearing dovecot index (may or may not be necessary, but the index would've been copied from the old server while scp'ing the mail): rm /var/mail/vhosts/jaylacroix.me/jay/dovecot.index*
 
 
 ###### Useful links:
