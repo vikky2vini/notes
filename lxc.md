@@ -79,7 +79,7 @@ Note: Set these in /etc/lxc/default.conf to make them always present in the resu
     Add the following lines to the config file:
       lxc.cgroup.devices.allow = c 195:* rwm
 
-    Add the following lines to manually moutn /dev/nvidia* devices:
+    Add the following lines to manually mount /dev/nvidia* devices:
       lxc.mount.entry = /dev/nvidia0 dev/nvidia0 none bind,optional,create=file
       lxc.mount.entry = /dev/nvidiactl dev/nvidiactl none bind,optional,create=file
       lxc.mount.entry = /dev/nvidia-modeset dev/nvidia-modeset none bind,optional,create=file
