@@ -51,19 +51,32 @@
     `scp -rp /etc/spamassassin root@<new-server>:/etc/`
     `scp -rp /etc/default/spamassassin root@<new-server>:/etc/default`
 
+  * Copy opendkim configuration file to new server:
+    `scp -rp /etc/opendkim.conf root@<new-server>:/etc/`
+
+  * Copy opendkim configuration directory to new server:
+    `scp -rp /etc/opendkim/ root@<new-server>:/etc/`
+
+  * Copy opendkim default configuration file to new server:
+    `scp -rp /etc/default/opendkim root@<new-server>:/etc/default/`
+
   * Copy alias files to new server:
     `scp -rp /etc/aliases* root@<new-server>:/etc/`
 
   * Create /etc/mailname file:
     `echo 'mail.iostreamcomputing.net' > /etc/mailname`
 
+  * Set logging options:
+    Edit /etc/rsyslog.d/50-default.conf
+    Set logging options for mail.warn, etc...
+
   * Create vmail user:
     Add to /etc/passwd: `vmail:x:5000:5000::/var/mail:/bin/sh`
     Add to /etc/group: `vmail:x:5000:`
-   Add to /etc/shadow: `vmail:!:16739:0:99999:7:::`
+    Add to /etc/shadow: `vmail:!:16739:0:99999:7:::`
 
   * Install required packages:
-    `apt-get install apache2 dovecot-core dovecot-imapd dovecot-lmtpd dovecot-managesieved dovecot-mysql dovecot-pop3d dovecot-sieve postfix postfix-mysql spamassassin`
+    `apt-get install apache2 dovecot-core dovecot-imapd dovecot-lmtpd dovecot-managesieved dovecot-mysql dovecot-pop3d dovecot-sieve opendkim opendkim-tools postfix postfix-mysql spamassassin`
 
   * Transfer email files from old server to new server:
    `scp -rp /var/mail/vhosts root@<new-server>:/var/mail/`
