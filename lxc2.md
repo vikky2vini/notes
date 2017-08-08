@@ -17,6 +17,9 @@
 ###### Running a command within a container
   `lxc exec <container_name> bash`
 
+###### Running a command which requires arguments within a container
+  `lxc exec <container_name> -- ls -lh`
+
 #### Working with images
 
 ###### List image repositories
