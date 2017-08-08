@@ -1,6 +1,6 @@
 ## Linux Containers (lxc2)
 
-#### Configuration
+#### Getting started
 
 ###### Initialization (new installation)
     `lxd init`
@@ -11,6 +11,9 @@
 ###### Create a new Ubuntu container
   `lxc launch ubuntu:16.04 mycontainer`
 
+###### Create a new Ubuntu container (on a specific storage pool)
+  `lxc launch ubuntu:16.04 mycontainer -s main`
+
 ###### Delete a container
   `lxc delete mycontainer
 
@@ -19,6 +22,14 @@
 
 ###### Running a command which requires arguments within a container
   `lxc exec <container_name> -- ls -lh`
+
+#### Working with storage pools
+
+###### Creating a new storage pool
+  `lxc storage create main dir source=/opt/lxd`
+
+###### Deleting a storage pool
+  `lxc storage delete main`
 
 #### Working with images
 
