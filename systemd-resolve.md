@@ -1,2 +1,2 @@
 Show assigned DNS servers:
-  systemd-resolve --status |grep DNS
+  systemd-resolve --status |grep DNS\ Servers
