@@ -34,3 +34,7 @@
 
 ###### Remove a special character from all files recursively
   `$ find . -type f | rename "s/\'//g"`
+
+###### Batch rename file extention
+  `$ find . -name "*.jpg" -exec sh -c 'mv "$1" "${1%.jpg}.mp4"' _ {} \;`
+
