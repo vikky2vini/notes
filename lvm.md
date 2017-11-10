@@ -5,8 +5,10 @@
        `# vgs`
   2. Extend the logical volume:
        `# lvextend -L +40g -n /dev/mapper/volgroup0-lv_home`
-  3. Resize the file-system:
+  3. Resize the file-system (ext filesystem):
        `# resize2fs /dev/mapper/volgroup0-lv_home`
+  4. Resize the file-system (xfs filesystem):
+       `# xfs_growfs /mount/point -D size` (don't include the -D flag to have it simply claim all the new space)
 
 ###### Create a new logical volume
        `# lvcreate -L 50GB -n lv_opt /dev/mapper/volgroup0`
