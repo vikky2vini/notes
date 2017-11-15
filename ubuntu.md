@@ -1,5 +1,11 @@
 ## Ubuntu
 
+###### Setup live-patch service:
+  1. Fully update system, reboot
+  2. `# snap install canonical-livepatch`
+  3. `# canonical-livepatch enable <secret_key>`
+  4. Run `# canonical-livepatch status` to see status
+
 ###### Compiling mednafen:
   1. Download latest mednafen source:
 	    http://sourceforge.net/projects/mednafen/
