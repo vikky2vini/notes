@@ -10,6 +10,8 @@
 
 ###### Create a new Ubuntu container
   `lxc launch ubuntu:16.04 mycontainer`
+  or:
+  `lxc launch images:ubuntu/xenial mycontainer`
 
 ###### Create a new Ubuntu container (on a specific storage pool)
   `lxc launch ubuntu:16.04 mycontainer -s main`
@@ -19,6 +21,9 @@
 
 ###### Running a command within a container
   `lxc exec <container_name> bash`
+
+###### Login in to the container
+  `lxc exec mycontainer -- sudo --login --user ubuntu`
 
 ###### Running a command which requires arguments within a container
   `lxc exec <container_name> -- ls -lh`
