@@ -5,16 +5,23 @@
 ###### Creating a virtual environment:
 	1. Make sure the required virtualenv package is installed:
           (i.e. python-virtualenv python3-virtualenv)
-    2. Create a directory for that project, cd into that project
-          `$ mkdir projects/myproject && cd projects/myproject`
-	3. Create the virtual environment:
-          `$ virtualenv .lpenv` (if you want to use system's version of python)
-          `$ virtualenv -p /usr/bin/python3 .lpvenv` (for a specific python version)
-	3. Activate the virtual environment:
-          `$ source /env/teamcity_env/bin/activate`
+    2. Create the virtual environment
+          `virtualenv my-project-name`
+          Note: This should create the project folder for you
+          `virtualenv -p /usr/bin/python3 my-project-name` (for python3)
+    3. Activate the virtual environment
+          `cd <project_dir>`
+          `source bin/activate`
 	4. Perform work
 	5. Deactivate the virtual environment
           `$ deactivate`
+
+###### Freezing a virtual environment:
+"Freezing" a virtual environment creates a requirements.txt file containing all the packages that are installed.
+	`pip freeze > requirements.txt`
+
+###### Installing packages from a requirements.txt file
+    `pip install -r requirements.txt`
 
 ## Packages
 * Packages are nothing more than a folder, with a special file: `__init__.py`. This file doesn't need to hold any code, but its presence in this directory tells python that the folder is actually a package.
