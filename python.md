@@ -5,40 +5,78 @@
 ###### Creating a virtual environment:
 	1. Make sure the required virtualenv package is installed:
           (i.e. python-virtualenv python3-virtualenv)
-    2. Create a directory for that project, cd into that project
-          `$ mkdir projects/myproject && cd projects/myproject`
-	3. Create the virtual environment:
-          `$ virtualenv .lpenv` (if you want to use system's version of python)
-          `$ virtualenv -p /usr/bin/python3 .lpvenv` (for a specific python version)
-	3. Activate the virtual environment:
-          `$ source /env/teamcity_env/bin/activate`
+    2. Create the virtual environment
+          `virtualenv my-project-name`
+          Note: This should create the project folder for you
+          `virtualenv -p /usr/bin/python3 my-project-name` (for python3)
+    3. Activate the virtual environment
+          `cd <project_dir>`
+          `source bin/activate`
 	4. Perform work
 	5. Deactivate the virtual environment
           `$ deactivate`
+
+###### Freezing a virtual environment:
+"Freezing" a virtual environment creates a requirements.txt file containing all the packages that are installed.
+	`pip freeze > requirements.txt`
+
+###### Installing packages from a requirements.txt file
+    `pip install -r requirements.txt`
 
 ## Packages
 * Packages are nothing more than a folder, with a special file: `__init__.py`. This file doesn't need to hold any code, but its presence in this directory tells python that the folder is actually a package.
 * The book "Learning Python" has a great writeup of what a package is and how it looks from a directory tree in the first chapter, in the section "How is Python code organized."
 
+## Variables
+* Variables that are constants should be in upper case
+* Variables that are created on "indent level 0" are global variables
+* Global variables are a bad thing, because any code anywhere can change their values
+
 ## Classes
+* A class is a classification of an object
+* An object is a particular instance of a class
+* Objects have attributes (name, age, etc) and methods
 * Classes are a way of packaging variables and functions together.
-* Inside a class, `__init__` is executed first.
+* Class names should begin with an uppercase letter
+* `def__init__(self)` is a special function called a constructor
+* The constructor is called first when an object from the class is created
+* Inside a class, parameters using self.<whatever> refer specically to the object created from the class
+* Inside a class, a variable beginning with self.<whatever> is an instance variable
+* A parameter within a class that doesn't include self.* is a static variable
+* Instance variables are used when tracking an individual item, for example, a persons age
+* A static variable is for tracking something globally, like a counter for how many people there are
+
 
 ###### Example:
 
-    class Enemy():
-        life = 3
+    class Address():
+        """ Hold all the fields for a mailing address """
+        def __init__(self):
+            self.name = ""
+            self.line1 = ""
+            self.line2 = ""
+            self.city = ""
+            self.state = ""
+            self.zip = ""
 
-        def attack(self):
-            print("Was attacked")
-            self.life -= 1
+    home_address = Address()
+    home_address.name = "John Doe"
+    home_address.line1 = "123 Address st
+    print(home_address.name)
 
-        def checkLife(self):
-            print(str(self.life))
+###### Example with required parameter
+    class Dog():
 
-    enemy1 = Enemy()
-    enemy1.attack()
-    enemy1.checkLife()
+        def __init__(self, new_name):
+            """  Constructor. """
+            self.name = new_name
+            print("A new dog object was created!")  # just an example, prints when object created
+
+    # To create the dog:
+    my_dog = Dog("Spot")
+
+    # This will error (no name provided):
+    herDog = Dog()
 
 ###### Example with instance and class variables:
 
@@ -55,7 +93,7 @@
     print(c.name)
     print(c.profession)
 
-###### Antoher example:
+###### Another example:
 In the example below, every Hero created from this class will always start with 100 health.
 
     class Hero:
@@ -93,6 +131,24 @@ In the example below, every Hero created from this class will always start with 
 
     jason.get_energy()
     boss.get_energy)
+    
+    
+###### Methods    
+* Methods define what an object can do
+* A method is a function that exists inside of a class
+* method definitions in a class look like any other function declaration,
+    but they include self (self is required even if the function doesn't use it):
+
+    class Dog():
+        def __init__(self):
+            self.age = 0
+            self.name = ""
+            self.weight = 0
+
+        def bark(self):
+            print("Woof")
+
+
 
 ## Inheritance:
 To Do: Add description and some notes here
@@ -103,13 +159,13 @@ To Do: Add description and some notes here
         def print_last_name(self):
             print("Smith")
 
-    class Child(Parent): <---- This class is inheriting from Parent
+    class Child(Parent): # This class is inheriting from Parent
         def print_first_name(self):
             print("Jason")
 
     r = Child()
     r.print_first_name()
-    r.print_last_name() <---- We can do this, because class Child inherits from Parent
+    r.print_last_name() # We can do this, because class Child inherits from Parent
 
 ###### Overriding:
 
@@ -282,6 +338,7 @@ Example:
 		mylist.sort()  # Sort the list, this actually changes the list to a sorted version
 
 ## dictionaries
+* Dictionaries are also known as "associative arrays"
 * dictionaries are mutable
 * It maps keys to values.
 * The keys are hashable.
