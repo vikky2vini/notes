@@ -2,12 +2,12 @@
 
 #### Previous issues:
 
-######  memcache errors in config page:
+######  memcache errors in config page
   * install: `php5-apcu`
   * Edit: `/var/www/nextcloud/config/config.php`
      Add: `'memcache.local' => '\OC\Memcache\APCu'`
 
-###### DAVDroid Syncing:
+###### DAVDroid Syncing
   * URL: `https://nextcloud.mydomain.tld/remote.php/dav/`
     (If nextcloud is a subdirectory, the URL would be:
     `https://server.tld/nextcloud/remote.php/dav/`
@@ -30,3 +30,13 @@
                 SetEnv HOME /var/www/nextcloud.mydomain.tld
                 SetEnv HTTP_HOME /var/www/nextcloud.mydomain.tld
         </Directory>
+
+###### Previous Issues
+
+#### e-book reader not saving bookmarks
+    * Add the following lines to /var/www/nextcloud.domain.net/config/config.php:
+        'overwrite.cli.url' => 'https://nextcloud.domain.net',
+        'htaccess.RewriteBase' => '/',
+    * Run the following command:
+        `sudo -u www-data php /var/www/nextcloud.domain.net/occ maintenance:update:htaccess`
+
