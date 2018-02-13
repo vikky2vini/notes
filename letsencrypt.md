@@ -7,6 +7,7 @@
 
 ###### Set up certificates
   `# certbot --apache -d example.com -d www.example.com`
+  `# sudo letsencrypt --apache -d office.iostreamcomputing.net` (this is the most recent one that worked)
 
 ###### Set up certificates (alternative method)
    As of 2018-01-26, the --apache method wasn't working.
