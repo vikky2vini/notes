@@ -19,6 +19,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
   7. Create efi partition:
 
        `# fdisk /dev/sda`
+
           * g (to create an empty GPT partition table)
           * n
           * 1
@@ -27,15 +28,21 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
           * t
           * 1 (For EFI)
           * w
+
  8. Create boot partition:
-       `# fdisk /dev/sda`
+
+     `# fdisk /dev/sda`
+
         * n
         * 2
         * enter
         * +400M
         * w
-  9. Create LVM partition
-        `# fdisk /dev/sda`
+
+  9. Create LVM partition:
+
+      `# fdisk /dev/sda`
+
         * n
         * 3
         * enter
