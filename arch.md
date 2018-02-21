@@ -17,9 +17,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
   5. Edit /etc/pacman.d/mirrorlist on the Arch computer and paste the faster servers
   6. Update package indexes: `# pacman -Syyy`
   7. Create efi partition:
-
        `# fdisk /dev/sda`
-
           * g (to create an empty GPT partition table)
           * n
           * 1
@@ -30,9 +28,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
           * w
 
  8. Create boot partition:
-
       `# fdisk /dev/sda`
-
          * n
          * 2
          * enter
@@ -40,9 +36,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
          * w
 
   9. Create LVM partition:
-
        `# fdisk /dev/sda`
-
           * n
           * 3
           * enter
@@ -101,7 +95,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
         * `# mkswap /swapfile`
         * `# echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab`
   39. `$ exit`
-  41. `# umount -a
+  41. `# umount -a`
   42. `# reboot`
 
 ###### Installation procedure (lvm with no encryption):
@@ -136,14 +130,14 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
   9. Format EFI partition
   `# mkfs.fat -F32 /dev/sda1`
   10. Set up lvm:
-      * Non-SSD: `# pvcreate /dev/sda2`
-      * SSD: `# pvcreate --dataalignment 1m /dev/sda2`
-      * `# vgcreate volgroup0 /dev/sda2`
-      * `# lvcreate -L 30GB volgroup0 -n lv_root`
-      * `# lvcreate -L 250GB volgroup0 -n lv_home`
-      * `# modprobe dm_mod`
-      * `# vgscan`
-      * `# vgchange -ay`
+        * Non-SSD: `# pvcreate /dev/sda2`
+        * SSD: `# pvcreate --dataalignment 1m /dev/sda2`
+        * `# vgcreate volgroup0 /dev/sda2`
+        * `# lvcreate -L 30GB volgroup0 -n lv_root`
+        * `# lvcreate -L 250GB volgroup0 -n lv_home`
+        * `# modprobe dm_mod`
+        * `# vgscan`
+        * `# vgchange -ay`
   11. `# mkfs.ext4 /dev/volgroup0/lv_root`
   12. `# mkfs.xfs /dev/volgroup0/lv_home`
   13. `# mount /dev/volgroup0/lv_root /mnt`
@@ -167,10 +161,10 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
   31. `# cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo`
   32. `# grub-mkconfig -o /boot/grub/grub.cfg`
   33. Create swap file:
-      `# fallocate -l 2G /swapfile`
-      `# chmod 600 /swapfile`
-      `# mkswap /swapfile`
-      `# echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab`
+        `# fallocate -l 2G /swapfile`
+        `# chmod 600 /swapfile`
+        `# mkswap /swapfile`
+        `# echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab`
   34. `$ exit`
   35. `# umount -a
   36. `# reboot`
