@@ -78,31 +78,30 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
   22. `# genfstab -U -p /mnt >> /mnt/etc/fstab`
   21. `# arch-chroot /mnt`
   22. `# pacman -S grub efibootmgr dosfstools openssh os-prober mtools linux-headers linux-lts linux-lts-headers`
-  23. If wireless: `# pacman -S dialog wpa_supplicant wireless_tools`
-  24. Edit `/etc/mkinitcpio.conf` and add `encrypt lvm2` in between `block` and `filesystems`
-  25. `# mkinitcpio -p linux`
-  26. `# mkinitcpio -p linux-lts`
-  27. `# nano /etc/locale.gen` (uncomment en_US.UTF-8)
-  28. `# locale-gen`
-  29. Enable `root` logon via `ssh`
-  30. `# systemctl enable sshd.service`
-  31. `# passwd` (for setting root password)
-  32. Edit `/etc/default/grub`:
+  23. Edit `/etc/mkinitcpio.conf` and add `encrypt lvm2` in between `block` and `filesystems`
+  24. `# mkinitcpio -p linux`
+  25. `# mkinitcpio -p linux-lts`
+  26. `# nano /etc/locale.gen` (uncomment en_US.UTF-8)
+  27. `# locale-gen`
+  28. Enable `root` logon via `ssh`
+  29. `# systemctl enable sshd.service`
+  30. `# passwd` (for setting root password)
+  31. Edit `/etc/default/grub`:
         add `cryptdevice=<PARTUUID>:volgroup0` to the `GRUB_CMDLINE_LINUX_DEFAULT` line
             If using standard device naming, the option will look like this: `cryptdevice=/dev/sda3:volgroup0`
-  33. `# mkdir /boot/EFI`
-  34. `# mount /dev/sda1 /boot/EFI`
-  35. `# grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck`
-  36. `# cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo`
-  37. `# grub-mkconfig -o /boot/grub/grub.cfg`
-  38. Create swap file:
+  32. `# mkdir /boot/EFI`
+  33. `# mount /dev/sda1 /boot/EFI`
+  34. `# grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck`
+  35. `# cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo`
+  36. `# grub-mkconfig -o /boot/grub/grub.cfg`
+  37. Create swap file:
         * `# fallocate -l 2G /swapfile`
         * `# chmod 600 /swapfile`
         * `# mkswap /swapfile`
         * `# echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab`
-  39. `$ exit`
-  41. `# umount -a`
-  42. `# reboot`
+  38. `$ exit`
+  39. `# umount -a`
+  40. `# reboot`
 
 ###### Installation procedure (lvm with no encryption):
   1. Use wifi-menu to connect to network
@@ -212,38 +211,37 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
         * `# vgchange -ay`
 
   9.  `# mkfs.ext4 /dev/volgroup0/lv_root`
-  10.  `# mkfs.ext4 /dev/volgroup0/lv_home`
-  11.  `# mount /dev/volgroup0/lv_root /mnt`
-  12.  `# mkdir /mnt/home`
-  13.  `# mount /dev/volgroup0/lv_home /mnt/home`
-  14.  `# pacstrap -i /mnt base`
-  15.  `# genfstab -U -p /mnt >> /mnt/etc/fstab`
-  16.  `# arch-chroot /mnt`
+  10. `# mkfs.ext4 /dev/volgroup0/lv_home`
+  11. `# mount /dev/volgroup0/lv_root /mnt`
+  12. `# mkdir /mnt/home`
+  13. `# mount /dev/volgroup0/lv_home /mnt/home`
+  14. `# pacstrap -i /mnt base`
+  15. `# genfstab -U -p /mnt >> /mnt/etc/fstab`
+  16. `# arch-chroot /mnt`
   17. `# pacman -S openssh grub-bios linux-headers linux-lts linux-lts-headers`
-  18. If wireless: `# pacman -S dialog wpa_supplicant wireless_tools`
-  19. Edit `/etc/mkinitcpio.conf` and add `lvm2` in between `block` and `filesystems`
-  20. `# mkinitcpio -p linux`
-  21. `# mkinitcpio -p linux-lts`
-  22. `# nano /etc/locale.gen (uncomment en_US.UTF-8)`
-  23. `# locale-gen`
-  24. `# ln -s /usr/share/zoneinfo/America/Detroit /etc/localtime`
-  25. `# hwclock --systohc --utc`
-  26. Enable `root` logon via `ssh`
-  27. `# systemctl enable sshd.service`
-  28. `# passwd` (for root)
-  29. `# grub-install --target=i386-pc --recheck /dev/sda`
-  30. `# cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo`
-  31. `# grub-mkconfig -o /boot/grub/grub.cfg`
-  32. Create swap file:
+  18. Edit `/etc/mkinitcpio.conf` and add `lvm2` in between `block` and `filesystems`
+  19. `# mkinitcpio -p linux`
+  20. `# mkinitcpio -p linux-lts`
+  21. `# nano /etc/locale.gen (uncomment en_US.UTF-8)`
+  22. `# locale-gen`
+  23. `# ln -s /usr/share/zoneinfo/America/Detroit /etc/localtime`
+  24. `# hwclock --systohc --utc`
+  25. Enable `root` logon via `ssh`
+  26. `# systemctl enable sshd.service`
+  27. `# passwd` (for root)
+  28. `# grub-install --target=i386-pc --recheck /dev/sda`
+  29. `# cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo`
+  30. `# grub-mkconfig -o /boot/grub/grub.cfg`
+  31. Create swap file:
         * `# fallocate -l 2G /swapfile`
         * `# chmod 600 /swapfile`
         * `# mkswap /swapfile`
         * `# echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab`
 
-  33. `$ exit`
-  34. `# umount /mnt/home`
-  35. `# umount /mnt`
-  36. `# reboot`
+  32. `$ exit`
+  33. `# umount /mnt/home`
+  34. `# umount /mnt`
+  35. `# reboot`
 
 ###### Post installation steps:
   1. Fix GNOME app issues: `# localectl set-locale LANG="en_US.UTF-8"`
