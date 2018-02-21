@@ -96,10 +96,10 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
   36. `# cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo`
   37. `# grub-mkconfig -o /boot/grub/grub.cfg`
   38. Create swap file:
-      `# fallocate -l 2G /swapfile`
-      `# chmod 600 /swapfile`
-      `# mkswap /swapfile`
-      `# echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab`
+        * `# fallocate -l 2G /swapfile`
+        * `# chmod 600 /swapfile`
+        * `# mkswap /swapfile`
+        * `# echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab`
   39. `$ exit`
   41. `# umount -a
   42. `# reboot`
