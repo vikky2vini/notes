@@ -52,8 +52,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
           * 31
           * w
 
-  10. Format EFI partition
-  `# mkfs.fat -F32 /dev/sda1`
+  10. `# mkfs.fat -F32 /dev/sda1`
   11. Format /boot partition
   `# mkfs.ext2 /dev/sda2`
   12. Set up encryption
@@ -70,9 +69,9 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
   14. `# mkfs.ext4 /dev/volgroup0/lv_root`
   15. `# mkfs.xfs /dev/volgroup0/lv_home`
   16. `# mount /dev/volgroup0/lv_root /mnt`
-  17. `# mkdir /mnt/boot
-  18. `# mkdir /mnt/home
-  19. `# mount /dev/sda2 /mnt/boot
+  17. `# mkdir /mnt/boot`
+  18. `# mkdir /mnt/home`
+  19. `# mount /dev/sda2 /mnt/boot`
   20. `# mount /dev/volgroup0/lv_home /mnt/home`
   21. `# pacstrap -i /mnt base`
   22. `# genfstab -U -p /mnt >> /mnt/etc/fstab`
@@ -150,7 +149,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
   11. `# mkfs.ext4 /dev/volgroup0/lv_root`
   12. `# mkfs.xfs /dev/volgroup0/lv_home`
   13. `# mount /dev/volgroup0/lv_root /mnt`
-  14. `# mkdir /mnt/home
+  14. `# mkdir /mnt/home`
   15. `# mount /dev/volgroup0/lv_home /mnt/home`
   16. `# pacstrap -i /mnt base`
   17. `# genfstab -U -p /mnt >> /mnt/etc/fstab`
