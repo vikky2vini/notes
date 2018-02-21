@@ -36,7 +36,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
         * +400M
         * w
   9. Create LVM partition
-  `# fdisk /dev/sda`
+        `# fdisk /dev/sda`
         * n
         * 3
         * enter
@@ -118,7 +118,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
         * 1 (For EFI)
         * w
   8. Create LVM partition
-  `# fdisk /dev/sda`
+        `# fdisk /dev/sda`
         * n
         * 2
         * enter
@@ -177,34 +177,29 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
   5. Edit /etc/pacman.d/mirrorlist on the Arch computer and paste the faster servers
   6. Update package indexes: `# pacman -Syyy`
   7. Partition disk, create lvm partition:
-
-     `# fdisk /dev/sda`
-
-      * o
-      * enter
-      * w
-      * n
-      * p
-      * 1
-      * enter
-      * enter
-      * t
-      * 1
-      * 8E
-      * w
+       `# fdisk /dev/sda`
+        * o
+        * enter
+        * w
+        * n
+        * p
+        * 1
+        * enter
+        * enter
+        * t
+        * 1
+        * 8E
+        * w
 
   8.  Create lvm:
-
         * Non-SSD: `# pvcreate /dev/sda1`
         * SSD: `# pvcreate --dataalignment 1m /dev/sda1`
-        * Example commands for setting up LVM:
-
-          * `# vgcreate volgroup0 /dev/sda1`
-          * `# lvcreate -L 30GB volgroup0 -n lv_root`
-          * `# lvcreate -L 250GB volgroup0 -n lv_home`
-          * `# modprobe dm_mod`
-          * `# vgscan`
-          * `# vgchange -ay`
+        * `# vgcreate volgroup0 /dev/sda1`
+        * `# lvcreate -L 30GB volgroup0 -n lv_root`
+        * `# lvcreate -L 250GB volgroup0 -n lv_home`
+        * `# modprobe dm_mod`
+        * `# vgscan`
+        * `# vgchange -ay`
 
   9.  `# mkfs.ext4 /dev/volgroup0/lv_root`
   10.  `# mkfs.ext4 /dev/volgroup0/lv_home`
