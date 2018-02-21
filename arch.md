@@ -17,15 +17,17 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
   5. Edit /etc/pacman.d/mirrorlist on the Arch computer and paste the faster servers
   6. Update package indexes: `# pacman -Syyy`
   7. Create efi partition:
-        `# fdisk /dev/sda`
-        * g (to create an empty GPT partition table)
-        * n
-        * 1
-        * enter
-        * +300M
-        * t
-        * 1 (For EFI)
-        * w
+
+       `# fdisk /dev/sda`
+
+          * g (to create an empty GPT partition table)
+          * n
+          * 1
+          * enter
+          * +300M
+          * t
+          * 1 (For EFI)
+          * w
  8. Create boot partition:
        `# fdisk /dev/sda`
         * n
