@@ -31,26 +31,26 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
 
  8. Create boot partition:
 
-     `# fdisk /dev/sda`
+      `# fdisk /dev/sda`
 
-        * n
-        * 2
-        * enter
-        * +400M
-        * w
+         * n
+         * 2
+         * enter
+         * +400M
+         * w
 
   9. Create LVM partition:
 
-      `# fdisk /dev/sda`
+       `# fdisk /dev/sda`
 
-        * n
-        * 3
-        * enter
-        * enter
-        * t
-        * 3
-        * 31
-        * w
+          * n
+          * 3
+          * enter
+          * enter
+          * t
+          * 3
+          * 31
+          * w
 
   10. Format EFI partition
   `# mkfs.fat -F32 /dev/sda1`
@@ -90,9 +90,9 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
   32. Edit `/etc/default/grub`:
         add `cryptdevice=<PARTUUID>:volgroup0` to the `GRUB_CMDLINE_LINUX_DEFAULT` line
             If using standard device naming, the option will look like this: `cryptdevice=/dev/sda3:volgroup0`
-  33. mkdir /boot/EFI
-  34. mount /dev/sda1 /boot/EFI
-  35. grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck
+  33. `# mkdir /boot/EFI`
+  34. `# mount /dev/sda1 /boot/EFI`
+  35. `# grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck`
   36. `# cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo`
   37. `# grub-mkconfig -o /boot/grub/grub.cfg`
   38. Create swap file:
@@ -112,27 +112,27 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
   5. Edit /etc/pacman.d/mirrorlist on the Arch computer and paste the faster servers
   6. Update package indexes: `# pacman -Syyy`
   7. Create efi partition:
-
        `# fdisk /dev/sda`
+          * g (to create an empty GPT partition table)
+          * n
+          * 1
+          * enter
+          * +300M
+          * t
+          * 1 (For EFI)
+          * w
 
-        * g (to create an empty GPT partition table)
-        * n
-        * 1
-        * enter
-        * +300M
-        * t
-        * 1 (For EFI)
-        * w
   8. Create LVM partition
-        `# fdisk /dev/sda`
-        * n
-        * 2
-        * enter
-        * enter
-        * t
-        * 2
-        * 31
-        * w
+       `# fdisk /dev/sda`
+          * n
+          * 2
+          * enter
+          * enter
+          * t
+          * 2
+          * 31
+          * w
+
   9. Format EFI partition
   `# mkfs.fat -F32 /dev/sda1`
   10. Set up lvm:
