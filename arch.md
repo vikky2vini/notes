@@ -19,7 +19,6 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
   7. Create efi partition:
 
        `# fdisk /dev/sda`
-
           * g (to create an empty GPT partition table)
           * n
           * 1
