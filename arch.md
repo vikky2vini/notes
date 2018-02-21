@@ -161,10 +161,10 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
   31. `# cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo`
   32. `# grub-mkconfig -o /boot/grub/grub.cfg`
   33. Create swap file:
-        `# fallocate -l 2G /swapfile`
-        `# chmod 600 /swapfile`
-        `# mkswap /swapfile`
-        `# echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab`
+        * `# fallocate -l 2G /swapfile`
+        * `# chmod 600 /swapfile`
+        * `# mkswap /swapfile`
+        * `# echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab`
   34. `$ exit`
   35. `# umount -a
   36. `# reboot`
@@ -225,10 +225,10 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
   30. `# cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo`
   31. `# grub-mkconfig -o /boot/grub/grub.cfg`
   32. Create swap file:
-      `# fallocate -l 2G /swapfile`
-      `# chmod 600 /swapfile`
-      `# mkswap /swapfile`
-      `# echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab`
+        * `# fallocate -l 2G /swapfile`
+        * `# chmod 600 /swapfile`
+        * `# mkswap /swapfile`
+        * `# echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab`
 
   33. `$ exit`
   34. `# umount /mnt/home`
