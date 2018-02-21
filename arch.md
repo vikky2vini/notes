@@ -53,8 +53,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
           * w
 
   10. `# mkfs.fat -F32 /dev/sda1`
-  11. Format /boot partition
-  `# mkfs.ext2 /dev/sda2`
+  11. `# mkfs.ext2 /dev/sda2`
   12. Set up encryption
         * `# cryptsetup luksFormat /dev/sda3`
         * `# cryptsetup open --type luks /dev/sda3 lvm`
