@@ -155,9 +155,9 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
   25. Enable `root` logon via `ssh`
   26. `# systemctl enable sshd.service`
   27. `# passwd` (for setting root password)
-  28. mkdir /boot/EFI
-  29. mount /dev/sda1 /boot/EFI
-  30. grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck
+  28. `# mkdir /boot/EFI`
+  29. `# mount /dev/sda1 /boot/EFI`
+  30. `# grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck`
   31. `# cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo`
   32. `# grub-mkconfig -o /boot/grub/grub.cfg`
   33. Create swap file:
