@@ -30,6 +30,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
           * w
 
  8. Create boot partition:
+
       `# fdisk /dev/sda`
          * n
          * 2
