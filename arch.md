@@ -29,7 +29,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
           * 1 (For EFI)
           * w
 
- 8. Create boot partition:
+  8. Create boot partition:
 
       `# fdisk /dev/sda`
 
@@ -56,16 +56,16 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
   11. Format /boot partition
   `# mkfs.ext2 /dev/sda2`
   12. Set up encryption
-       * `# cryptsetup luksFormat /dev/sda3`
-       * `# cryptsetup open --type luks /dev/sda3 lvm`
+        * `# cryptsetup luksFormat /dev/sda3`
+        * `# cryptsetup open --type luks /dev/sda3 lvm`
   13. Set up lvm:
-       * `# pvcreate --dataalignment 1m /dev/mapper/lvm`
-       * `# vgcreate volgroup0 /dev/mapper/lvm`
-       * `# lvcreate -L 30GB volgroup0 -n lv_root`
-       * `# lvcreate -L 250GB volgroup0 -n lv_home`
-       * `# modprobe dm_mod`
-       * `# vgscan`
-       * `# vgchange -ay`
+        * `# pvcreate --dataalignment 1m /dev/mapper/lvm`
+        * `# vgcreate volgroup0 /dev/mapper/lvm`
+        * `# lvcreate -L 30GB volgroup0 -n lv_root`
+        * `# lvcreate -L 250GB volgroup0 -n lv_home`
+        * `# modprobe dm_mod`
+        * `# vgscan`
+        * `# vgchange -ay`
   14. `# mkfs.ext4 /dev/volgroup0/lv_root`
   15. `# mkfs.xfs /dev/volgroup0/lv_home`
   16. `# mount /dev/volgroup0/lv_root /mnt`
@@ -135,8 +135,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
           * 31
           * w
 
-  9. Format EFI partition
-  `# mkfs.fat -F32 /dev/sda1`
+  9. `# mkfs.fat -F32 /dev/sda1`
   10. Set up lvm:
         * Non-SSD: `# pvcreate /dev/sda2`
         * SSD: `# pvcreate --dataalignment 1m /dev/sda2`
