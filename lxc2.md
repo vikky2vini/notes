@@ -28,13 +28,56 @@
 ###### Running a command which requires arguments within a container
   `lxc exec <container_name> -- ls -lh`
 
+#### Working with profiles
+###### Create a new profile
+  `lxc profile create myprofile`
+
+###### Edit a profile
+  `lxc profile edit myprofile`
+
+###### Delete a profile
+  `lxc profile delete myprofile1
+
+###### Launch a container with a specific profile:
+  `lxc launch mynewcontainer -p myprofile -p extbr0`
+
+###### Launch a container with a specific profile, and apply a second to override the first:
+  `lxc launch mynewcontainer -p default -p extbr0`
+
+###### Show the current profile configuration
+  `lxc profile show extbr0`
+
+###### Edit a network profile
+  `lxc profile edit extbr0`
+
+###### External accessible bridge example
+  ```
+  description: External access profile
+  devices:
+    eth0:
+      name: eth0
+      nictype: bridged
+      parent: br0
+      type: nic
+  ```
+
 #### Working with storage pools
 
-###### Creating a new storage pool
+###### List storage pools
+  `lxc storage list`
+
+###### Creating a new storage pool, mapped to file-system directory
   `lxc storage create main dir source=/opt/lxd`
+
+###### Create a new storage pool, mapped to block device
+  `lxc storage create pool-name btrfs source=/dev/sdb`
 
 ###### Deleting a storage pool
   `lxc storage delete main`
+
+###### Set default storage pool
+  `lxc profile edit default`
+  Set the default storage volume in the editor that appears
 
 #### Working with images
 
