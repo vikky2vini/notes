@@ -9,7 +9,76 @@
 Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
 
 ### Installation procedures
-###### Installation procedure (encrypted lvm):
+###### General Installation procedure (standard install on EFI):
+  1. Use wifi-menu to connect to network
+  2. Start ssh `# systemctl start sshd`
+  3. Connect to machine via SSH
+  4. Visit https://www.archlinux.org/mirrorlist/ on another computer, generate mirrorlist
+  5. Edit /etc/pacman.d/mirrorlist on the Arch computer and paste the faster servers
+  6. Update package indexes: `# pacman -Syyy`
+  7. Create efi partition:
+
+       `# fdisk /dev/sda`
+
+          * g (to create an empty GPT partition table)
+          * n
+          * 1
+          * enter
+          * +300M
+          * t
+          * 1 (For EFI)
+          * w
+
+  8. Create root partition:
+
+      `# fdisk /dev/sda`
+
+         * n
+         * 2
+         * enter
+         * +30G
+         * w
+
+  9. Create home partition:
+
+       `# fdisk /dev/sda`
+
+          * n
+          * 3
+          * enter
+          * enter
+          * w
+
+  10. `# mkfs.fat -F32 /dev/sda1`
+  11. `# mkfs.ext4 /dev/sda2`
+      `# mkfs.ext4 /dev/sda3`
+      `# mount /dev/sda2 /mnt`
+  12. `# mkdir /mnt/home`
+  13. `# mount /dev/sda3 /mnt/home`
+  14. `# pacstrap -i /mnt base`
+  15. `# genfstab -U -p /mnt >> /mnt/etc/fstab`
+  16. `# arch-chroot /mnt`
+  17. `# pacman -S grub efibootmgr dosfstools openssh os-prober mtools linux-headers linux-lts linux-lts-headers`
+  18. `# nano /etc/locale.gen` (uncomment en_US.UTF-8)
+  19. `# locale-gen`
+  20. Enable `root` logon via `ssh`
+  21. `# systemctl enable sshd.service`
+  22. `# passwd` (for setting root password)
+  23. `# mkdir /boot/EFI`
+  24. `# mount /dev/sda1 /boot/EFI`
+  25. `# grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck`
+  26. `# cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo`
+  27. `# grub-mkconfig -o /boot/grub/grub.cfg`
+  28. Create swap file:
+        * `# fallocate -l 2G /swapfile`
+        * `# chmod 600 /swapfile`
+        * `# mkswap /swapfile`
+        * `# echo '/swapfile none swap sw 0 0' | tee -a /etc/fstab`
+  29. `$ exit`
+  30. `# umount -a`
+  31. `# reboot`
+
+###### Installation procedure (encrypted lvm on EFI):
   1. Use wifi-menu to connect to network
   2. Start ssh `# systemctl start sshd`
   3. Connect to machine via SSH
