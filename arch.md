@@ -96,7 +96,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
         * `# fallocate -l 2G /swapfile`
         * `# chmod 600 /swapfile`
         * `# mkswap /swapfile`
-        * `# echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab`
+        * `# echo '/swapfile none swap sw 0 0' | tee -a /etc/fstab`
   38. `$ exit`
   39. `# umount -a`
   40. `# reboot`
@@ -170,7 +170,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
         * `# fallocate -l 2G /swapfile`
         * `# chmod 600 /swapfile`
         * `# mkswap /swapfile`
-        * `# echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab`
+        * `# echo '/swapfile none swap sw 0 0' | tee -a /etc/fstab`
   34. `$ exit`
   35. `# umount -a
   36. `# reboot`
@@ -233,7 +233,7 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
         * `# fallocate -l 2G /swapfile`
         * `# chmod 600 /swapfile`
         * `# mkswap /swapfile`
-        * `# echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab`
+        * `# echo '/swapfile none swap sw 0 0' | tee -a /etc/fstab`
 
   32. `$ exit`
   33. `# umount /mnt/home`
