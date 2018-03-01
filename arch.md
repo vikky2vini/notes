@@ -9,6 +9,61 @@
 Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
 
 ### Installation procedures
+###### Installation procedure (basic install):
+  1. Use wifi-menu to connect to network
+  2. Start ssh `# systemctl start sshd`
+  3. Connect to machine via SSH
+  4. Visit https://www.archlinux.org/mirrorlist/ on another computer, generate mirrorlist
+  5. Edit /etc/pacman.d/mirrorlist on the Arch computer and paste the faster servers
+  6. Update package indexes: `# pacman -Syyy`
+  7. Create root partition:
+
+       `# fdisk /dev/sda`
+
+          * o (to create an empty DOS partition table)
+          * n
+          * 1
+          * enter
+          * +30G
+          * w
+
+  8. Create home partition:
+
+      `# fdisk /dev/sda`
+
+         * n
+         * 2
+         * enter
+         * ebter
+         * w
+
+  9. `mkfs.ext4 /dev/sda1`
+  10. `# mkfs.ext4 /dev/sda2`
+  11. `# mount /dev/sda1 /mnt`
+  12. `# mkdir /mnt/home`
+  13. `# mount /dev/sda2 /mnt/home`
+  14. `# pacstrap -i /mnt base`
+  15. `# genfstab -U -p /mnt >> /mnt/etc/fstab`
+  16. `# arch-chroot /mnt`
+  17. `# pacman -S openssh grub-bios linux-headers linux-lts linux-lts-headers`
+  18. If wireless: `# pacman -S dialog network-manager-applet networkmanager networkmanager-openvpn wireless_tools wpa_supplicant wpa_actiond`  
+  19. `# mkinitcpio -p linux`
+  20. `# mkinitcpio -p linux-lts`
+  21. `# nano /etc/locale.gen` (uncomment en_US.UTF-8)
+  22. `# locale-gen`
+  23. `# passwd` (for setting root password)
+  24. `# grub-install --target=i386-pc --recheck /dev/sda`
+  25. `# cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo`
+  26. `# grub-mkconfig -o /boot/grub/grub.cfg`
+  27. Create swap file:
+        * `# fallocate -l 2G /swapfile`
+        * `# chmod 600 /swapfile`
+        * `# mkswap /swapfile`
+        * `# echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab`
+  28. `$ exit`
+  29. `# umount -a`
+  30. `# reboot`
+
 ###### General Installation procedure (standard install on EFI):
   1. Use wifi-menu to connect to network
   2. Start ssh `# systemctl start sshd`
