@@ -70,7 +70,6 @@
     Final steps:
       Copy check_nrpe to /opt/nagios/plugins/check_nrpe
       Add these lines to sudoers:
-        nagios ALL=(ALL) NOPASSWD: /usr/lib/nagios/plugins/check_dhcp
         nagios ALL=(ALL) NOPASSWD: /bin/journalctl
         nagios ALL=(ALL) NOPASSWD: /etc/init.d/apache2
         nagios ALL=(ALL) NOPASSWD: /etc/init.d/nagios
