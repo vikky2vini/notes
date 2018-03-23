@@ -16,6 +16,9 @@
 ###### Create a new Ubuntu container (on a specific storage pool)
   `lxc launch ubuntu:16.04 mycontainer -s main`
 
+###### Create a container that matches a specific cloud instance type
+  `lxc launch -t m3.large ubuntu:16.04 aws-m3large`
+
 ###### Delete a container
   `lxc delete mycontainer
 
@@ -27,6 +30,9 @@
 
 ###### Running a command which requires arguments within a container
   `lxc exec <container_name> -- ls -lh`
+
+###### Set CPU limit on container
+  `lxc config set mycontainer limits.cpu 3`
 
 #### Working with profiles
 ###### Create a new profile
