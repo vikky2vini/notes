@@ -86,3 +86,6 @@ SSLProxyCheckPeerName Off
     * Run the following command:
         `sudo -u www-data php /var/www/nextcloud.domain.net/occ maintenance:update:htaccess`
 
+#### URL for syncing contacts to macOS
+  Use the following URL for adding contacts to macOS:
+  `https://nextcloud.iostre%mcomputing.net/remote.php/dav/principals/users/jay`
