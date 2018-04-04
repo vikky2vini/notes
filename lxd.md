@@ -25,6 +25,12 @@
 ###### Running a command within a container
   `lxc exec <container_name> bash`
 
+###### Starting a container
+  `lxc-start mycontainer`
+
+###### Stopping a container
+  `lxc-stop mycontainer` (verify this, may work as of lxc 3.0)
+
 ###### Login in to the container
   `lxc exec mycontainer -- sudo --login --user ubuntu`
 
