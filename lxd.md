@@ -73,6 +73,14 @@
       type: nic
   ```
 
+#### Setting resource limits
+###### Limit disk space:
+  Note: From what I understand, if disk size is inherited by profile, this will not work
+  `lxc config device set mycontainer root size 20GB`
+
+###### Limit RAM:
+  `lxc config set mycontiner limits.memory 1GB`
+
 #### Working with storage pools
 
 ###### List storage pools
