@@ -27,7 +27,7 @@
 
 ###### Allow role to log in to the server:
   From the PostgreSQL prompt:
-  `ALTER ROLE "g2g" WITH LOGIN;`
+  `ALTER ROLE "role_name" WITH LOGIN;`
 
 ###### List roles
   From the PostgreSQL prompt:
