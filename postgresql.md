@@ -23,7 +23,11 @@
 
 ###### Add password to role:
   From the PostgreSQL prompt:
-  `ALTER ROLE myrole WITH PASSWORD 'password'`
+  `ALTER ROLE myrole WITH ENCRYPTED PASSWORD 'password'`
+
+###### Allow role to log in to the server:
+  From the PostgreSQL prompt:
+  `ALTER ROLE "g2g" WITH LOGIN;`
 
 ###### List roles
   From the PostgreSQL prompt:
