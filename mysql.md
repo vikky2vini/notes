@@ -1,46 +1,55 @@
 ## mysql
 
-###### Access mysql:
+###### Access mysql
   `$ mysql -u root -p`
 
-###### Create a database:
+###### Create a database
   `create database dbname;`
 
-###### Show existing databases:
+###### Show existing databases
   `show databases;`
 
-###### Show existing tables in a database:
+###### Show existing tables in a database
   `use mydb;`
   `show tables;`
 
-###### Display users:
+###### Display users
   `SELECT User,Host FROM mysql.user;`
 
 ###### Create a user:
   `CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'mypassword';`
   `CREATE USER 'myuser'@'10.10.%.%' IDENTIFIED BY 'mypassword'; (If needing to connect via unix socket)`
 
-###### Create a user and a grant at the same time:
-  `grant all privileges on db_name.* to user@localhost identified by 'secret_password';`
+###### Grant privileges to a user
+  `GRANT ALL PRIVILEGES ON mydb.* TO 'myuser'@'localhost';`
+  `GRANT ALL PRIVILEGES ON mydb.* TO 'myuser'@'10.10.%.%';` (If needing to connect via something other than localhost)
+  `FLUSH PRIVILEGES;`
 
-###### Change user's password:
+###### Show privileges for a user
+  `SHOW GRANTS FOR 'dashboard'@'10.10.%.%';`
+
+###### Create a user and a grant at the same time
+  `GRANT ALL PRIVILEGES ON db_name.* TO user@localhost IDENTIFIED BY 'secret_password';`
+
+###### Create a user and grant, but restrict to a specific subnet
+  `GRANT ALL PRIVILEGES ON db_name.* TO user@'172.16.248.%' IDENTIFIED BY 'secret_password';`
+
+###### Change user's password
   `SET PASSWORD FOR 'myuser'@'localhost' = PASSWORD('newpass');`
   `SET PASSWORD FOR 'myuser'@'10.10.%.%' = PASSWORD('newpass'); (If needing to connect via unix socket)`
   `FLUSH PRIVILEGES;`
 
-###### Delete a user:
+###### Delete a user
   `drop user 'dashboard'@'%.nsbloomfield.com';`
 
-###### Delete a user (another method):
+###### Delete a user (another method)
   `DELETE FROM mysql.user WHERE User='name';`
 
-###### Show privileges for a user:
-  `show grants for 'dashboard'@'10.10.%.%';`
+###### Back up a database via mysqldump
+  `mysqldump -u root -p dbname > backup.sql`
 
-###### Grant privileges to a user:
-  `GRANT ALL PRIVILEGES ON mydb.* TO 'myuser'@'localhost';`
-  `GRANT ALL PRIVILEGES ON mydb.* TO 'myuser'@'10.10.%.%'; (If needing to connect via something other than localhost)`
-  `FLUSH PRIVILEGES;`
+###### Restore a backup from mysqldump
+  `mysql -u user -p -h db-endpoint < ./mybackup.sql`
 
 #### Previous issues
 ###### Access denied for debian-sys-maint error:
@@ -52,3 +61,4 @@
 
 ###### Links:
 [Check and repair myqsl tables:](http://www.thegeekstuff.com/2011/12/mysqlcheck/)
+[Useful mysqldump article:](http://webcheatsheet.com/sql/mysql_backup_restore.php)
