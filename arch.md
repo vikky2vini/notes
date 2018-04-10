@@ -34,10 +34,10 @@ Edit `/etc/systemd/logind.conf` and set `HandleLidSwitch` to `ignore`.
          * n
          * 2
          * enter
-         * ebter
+         * enter
          * w
 
-  9. `mkfs.ext4 /dev/sda1`
+  9. `# mkfs.ext4 /dev/sda1`
   10. `# mkfs.ext4 /dev/sda2`
   11. `# mount /dev/sda1 /mnt`
   12. `# mkdir /mnt/home`
