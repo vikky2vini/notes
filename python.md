@@ -2,6 +2,13 @@
 
 ## Virtual Environments
 
+###### Creating a virtual environment (using pyvenv):
+    1. Make sure python 3 is installed
+    2. Create project directory
+    3. Create the virtual environment: `pyvenv -m venv penguicon_pygame`
+    4. Activate the virtual environment: `source bin/activate`
+    5. Deactivate the virtual environment: deactivate
+
 ###### Creating a virtual environment:
 	1. Make sure the required virtualenv package is installed:
           (i.e. python-virtualenv python3-virtualenv)
@@ -463,3 +470,7 @@ https://pypi.python.org/pypi/pdbpp/
 
 
 [More info on lists, tuples, and dictionaries](    http://www.wellho.net/solutions/python-python-list-python-tuple-python-dictionary.html)
+
+## Previous Issues
+  virtualenv command not found on macvirtualenv command not found on mac:
+  `ln -s /Library/Frameworks/Python.framework/Versions/3.6/bin/virtualenv /usr/local/bin`
