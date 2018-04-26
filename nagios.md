@@ -76,3 +76,5 @@
         nagios ALL=(ALL) NOPASSWD: /etc/init.d/nagios
       For Telegram alerter:
         sudo pip install twx.botapi
+      To make / redirect to /nagios, add this to 000-default.conf:
+        RedirectMatch ^/$ /nagios
