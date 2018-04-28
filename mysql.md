@@ -51,6 +51,11 @@
 ###### Restore a backup from mysqldump
   `mysql -u user -p -h db-endpoint < ./mybackup.sql`
 
+#### Configuration
+###### Open server to outside connections
+  Edit mariadb.conf.d/50-server.cnf
+  Comment out the line: bind-address       = 127.0.0.1
+
 #### Previous issues
 ###### Access denied for debian-sys-maint error:
   It may be necessary to reinstall `mysql`
