@@ -22,6 +22,15 @@
 ###### Pull down a container from the docker hub:
   `# docker pull training/sinatra`
 
+###### Run a docker container, remove it when it's finished:
+  `# docker run --rm ubuntu:latest /bin/bash`
+
+###### Make two containers able to talk to each-other:
+  `# docker run --link container-a --name container-b myimage`
+
+###### Use environment variables:
+  `# docker run -d --name pengdb -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB docker.io/postgres`
+
 ###### Run a docker container with an interactive shell:
   `# docker run -it ubuntu:latest /bin/bash`
     Note: If the container doesn't exist locally, it will search the hub
